@@ -23,6 +23,8 @@
 #include    "Led_Ctrl.h"
 /** Watchdog control function prototypes definitions */
 #include    "Wdg.h"
+/** Dynamic memory allocation*/
+#include "Mem_Alloc.h"
 
 
 /*~~~~~~  Local definitions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -40,6 +42,11 @@
  *
  *  \return Unused (ANSI-C compatibility).
  */
+uint8_t *a,*b;
+uint16_t *c,*d, counter = 0;
+uint8_t *e,*f;
+
+extern Mem_HandlerType MemControl;
 extern int main( void )
 {
 	/* Disable watchdog */
@@ -53,7 +60,24 @@ extern int main( void )
 	/* Configure LEDs */
 	printf( "-- Led Control --\n\r" ) ;
 	LedCtrl_Configure(); 
-	/* Scheduler Inititalization */
+  
+	/*Dynamic memory allocation */
+  a = (uint8_t*)Mem_Alloc(sizeof(uint8_t));    
+  b = (uint8_t*)Mem_Alloc(sizeof(uint8_t));
+  c = (uint16_t*)Mem_Alloc(sizeof(uint16_t));
+  d = (uint16_t*)Mem_Alloc(sizeof(uint16_t));
+  e = (uint8_t*)Mem_Alloc(10);
+  f = (uint8_t*)Mem_Alloc(sizeof(uint8_t));
+  
+  *a = 1;
+  *b = 2;
+  *c = 3;
+  *d = 4;
+  *e = 5;
+  *f = 6;
+  
+  /* Scheduler Inititalization */
+  /* */
 	printf( "-- Scheduler Initialization --\n\r" ) ;
 	SchM_Init();
 	
